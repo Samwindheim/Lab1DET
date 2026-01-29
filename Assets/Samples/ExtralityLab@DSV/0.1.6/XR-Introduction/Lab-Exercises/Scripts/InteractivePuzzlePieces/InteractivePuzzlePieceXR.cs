@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-// using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 public abstract class InteractivePuzzlePieceXR<TComponent> : BaseInteractivePuzzlePieceXR
 where TComponent : Component
@@ -10,8 +10,8 @@ where TComponent : Component
 
 public abstract class BaseInteractivePuzzlePieceXR : MonoBehaviour
 {
-    public KeyCode interactKey = KeyCode.Space;
-    // public InputActionReference interactActionReference;
+    // public KeyCode interactKey = KeyCode.Space;
+    public InputActionReference interactActionReference;
 
     public Rigidbody rb;
     public AudioClip activateSound;
@@ -28,20 +28,20 @@ public abstract class BaseInteractivePuzzlePieceXR : MonoBehaviour
     {
         if (m_IsControllable)
         {
-            if(Input.GetKey(interactKey))
-            // if(interactActionReference.action.IsPressed())
+            // if(Input.GetKey(interactKey))
+            if(interactActionReference.action.IsPressed())
             {
                 activateState = true;
             }
 
-            if(Input.GetKeyDown(interactKey) )
-            // if (interactActionReference.action.WasPressedThisFrame())
+            // if(Input.GetKeyDown(interactKey) )
+            if (interactActionReference.action.WasPressedThisFrame())
             {
                 playOneTimeActivateAudio = true;
             }
 
-            if(Input.GetKeyUp(interactKey) )
-            // if(interactActionReference.action.WasReleasedThisFrame())
+            // if(Input.GetKeyUp(interactKey) )
+            if(interactActionReference.action.WasReleasedThisFrame())
             {
                 playOneTimeDeactivateAudio = true;
                 activateState = false;
